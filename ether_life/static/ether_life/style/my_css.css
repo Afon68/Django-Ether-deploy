@@ -1,0 +1,19 @@
+
+.content-container {
+    display: flex;
+    justify-content: space-between; /* Расстояние между элементами */
+    align-items: center;
+    gap: 0px; /* Отступ между графиком и таблицей */
+}
+
+.chart-container {
+    width: 75%;
+    margin-right: 3rem;
+}
+
+.table-container {
+    width: 35%;
+}
+.current {
+    color:red
+}

@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{% static "ether_life/style/my_css.css" %}"> 
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "ether_life/img/fav/apple-touch-icon.png" %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static "ether_life/img/fav/favicon-32x32.png" %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "ether_life/img/fav/favicon-16x16.png" %}">
+    <link rel="manifest" href="{% static "ether_life/img/fav/site.webmanifest" %}">
+    <title>Ethereum Цена</title>
+</head>
+<body>
+    <div class="container">
+        <h2 id="current">Текущая цена Ethereum: <span id="eth-price">Загрузка...</span></h2>
+        <h2>История цен на Ethereum</h2>
+        <div class="content-container">   
+            <table border="1" id="table-container">
+                <style>
+                    .up { color: red; font-weight: bold; }     /* 🔼 Красная стрелка */
+                    .down { color: green; font-weight: bold; } /* 🔽 Зелёная стрелка */
+                    .neutral { color: gray; }                  /* ➖ Серый прочерк */
+                </style>
+            </table>
+            <div class="chart-container">
+                <canvas id="ethChart"></canvas> <!-- График -->
+            </div>
+        </div>
+    </div>
+
+    
+    
+    <script src="{% static 'ether_life/js/chart.js' %}"></script>
+    <script src="{% static 'ether_life/js/update_list.js' %}"></script>
+</body>
+</html>
+
+<!--
+daphne -b 0.0.0.0 -p 8000 display_ether.asgi:application 
+
+-->
