@@ -7,17 +7,33 @@ from django.utils.timezone import localtime, now
 from datetime import timedelta
 from django.http import JsonResponse
 
+# def update_eth_price():
+#     """Записываем новую цену только если она изменилась"""
+#     price = get_eth_price()
+#     last_price = EthereumPrice.objects.order_by('-timestamp').first()
+#     print(last_price)
+#     print(price)
+#     if last_price is None or float(last_price.price) != price:
+#         EthereumPrice.objects.create(price=price)
+#         print(f"✅ Новая цена {price} записана в БД!")
+#     else:
+#         print(f"🔄 Цена не изменилась ({price}), запись пропущена.")
+
 def update_eth_price():
-    """Записываем новую цену только если она изменилась"""
     price = get_eth_price()
+    if price is None:
+        print("❌ Цена Ethereum не обновлена из-за ошибки API.")
+        return
     last_price = EthereumPrice.objects.order_by('-timestamp').first()
     print(last_price)
     print(price)
+    """Записываем новую цену только если она изменилась"""
     if last_price is None or float(last_price.price) != price:
         EthereumPrice.objects.create(price=price)
         print(f"✅ Новая цена {price} записана в БД!")
     else:
         print(f"🔄 Цена не изменилась ({price}), запись пропущена.")
+
 
 def get_latest_price_list(request):
     prices = EthereumPrice.objects.all().order_by('-timestamp')[:25] # Последние 24 записи
