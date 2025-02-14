@@ -48,12 +48,30 @@ const ctx = document.getElementById('ethChart').getContext('2d');
                         }
                     });
                     
-            
+                if (typeof window.ethereum === 'undefined') {
+                    console.warn("ethereum не найден в window.");
+                } else {
+                    console.warn("ethereum уже определён (например, MetaMask). Конфликт устранён.");
+                }
+                    
                 // ✅ Подключаем WebSocket
-                const socket = new WebSocket("ws://127.0.0.1:8000/ws/eth-price/");
+                const socket = new WebSocket(
+                        window.location.protocol === "https:" ? 
+                        `wss://${window.location.host}/ws/eth-price/` : 
+                        `ws://${window.location.host}/ws/eth-price/`
+                    );
+
+                // socket.onmessage = function (event) {
+                //     console.log("📩 Данные от WebSocket:", event.data);
+                //     const data = JSON.parse(event.data);
+
                 socket.onmessage = function (event) {
                     console.log("📩 Данные от WebSocket:", event.data);
                     const data = JSON.parse(event.data);
+                    if (!data.prices || !Array.isArray(data.prices)) {
+                        console.error("❌ Ошибка: Данные WebSocket отсутствуют или имеют неверный формат.");
+                        return;
+                    }
             
                     // ✅ Получаем **самую последнюю цену**
                     let latest_price = data.prices[0].price;
@@ -65,9 +83,9 @@ const ctx = document.getElementById('ethChart').getContext('2d');
                     priceElement.style.color = latest_price > previous_price ? "green" : "red";
                     document.getElementById("current").style.color = latest_price > previous_price ? "green" : "red";
                 
-                    // ✅ 1. Разворачиваем массив, чтобы новые данные были в конце
+                    
                     const sortedPrices = data.prices;
-                
+                    // const sortedPrices = data.prices.filter(p => p.price !== undefined);
                     // ✅ 2. Перебираем весь массив и обновляем график
                     ethChart.data.labels = [];
                     ethChart.data.datasets[0].data = [];

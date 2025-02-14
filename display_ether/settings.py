@@ -29,9 +29,12 @@ SECRET_KEY = 'django-insecure-o5@-07+d+jawvjbj5aa3gc^lf)&d#2la^m6zd549ql)%vj#dk!
 
 # DEBUG = True
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://django-ether-deploy.onrender.com",
+    "https://*.onrender.com"
+]
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# DEBUG = os.getenv("DJANGO_DEBUG", "False") == "True"
-# SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "my-default-secret-key")
 ALLOWED_HOSTS = ["*", "django-ether-deploy.onrender.com"]
 # 'django-ether-deploy.onrender.com' to ALLOWED_HOSTS.
 # ✅ Переменные окружения
