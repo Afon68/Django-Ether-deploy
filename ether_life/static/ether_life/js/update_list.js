@@ -15,9 +15,7 @@ function updateList() {
             for (let elem of data.price_list.slice(0,24).reverse()) {
                 let row = table.insertRow(-1);  // Добавляем новую строку
                 // row.insertCell(0).innerText = elem.timestamp;  // Время
-                let date = new Date(elem.timestamp);
-                 
-                row.insertCell(0).innerText = date.toLocaleString() //.replace(","," ");  // Время
+                row.insertCell(0).innerText = convertISOToLocal(elem.timestamp).replace(","," ");  // Время
 
                 
                 let priceCell = row.insertCell(1)
@@ -45,7 +43,16 @@ function updateList() {
 setInterval(updateList, 60000);  // 🔄 Обновляем цену каждые 5 секунд
 updateList();  // 🔥 Запускаем сразу при загрузке страницы
 
+// function convertISOToLocal(isoString) {
+//     let date = new Date(isoString);
+//     return date.toLocaleString(); 
+// }
+
 function convertISOToLocal(isoString) {
-    let date = new Date(isoString);
-    return date.toLocaleString(); 
+    let timestamp = Date.parse(isoString);
+    if (isNaN(timestamp)) {
+        console.error("Неверный формат даты:", isoString);
+        return "Invalid Date";
+    }
+    return new Date(timestamp).toLocaleString();
 }
