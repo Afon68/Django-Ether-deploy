@@ -48,7 +48,8 @@ updateList();  // 🔥 Запускаем сразу при загрузке с�
 //     return date.toLocaleString(); 
 // }
 
-function convertISOToLocal(isoString) {
+function convertISOToLocal(parametr) {
+    isoString = isoStr.replace(" ", "T") +".000Z"
     console.log(`Тип времени:${typeof(isoString)}`)
     console.log(`Время:${isoString}`)
     let timestamp = Date.parse(isoString);
