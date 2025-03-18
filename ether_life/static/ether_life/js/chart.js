@@ -92,7 +92,7 @@ const ctx = document.getElementById('ethChart').getContext('2d');
                     //ethChart.data.datasets[0].borderColor = [];
                     sortedPrices.forEach(priceData => {
                         
-                        ethChart.data.labels.unshift(priceData.timestamp);
+                        ethChart.data.labels.unshift(convertISOToLocal(priceData.timestamp).replace(/20|,/gi, () => ""));
                         ethChart.data.datasets[0].data.unshift(priceData.price);
                     });
                     // красим сегменты(звенья) графика и фон под ними
@@ -136,3 +136,8 @@ const ctx = document.getElementById('ethChart').getContext('2d');
                 socket.onerror = function (error) {
                     console.error("WebSocket Ошибка: ", error);
                 };
+
+                function convertISOToLocal(isoString) {
+                    let date = new Date(isoString);
+                    return date.toLocaleString(); 
+                }
