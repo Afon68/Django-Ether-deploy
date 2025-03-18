@@ -49,6 +49,8 @@ updateList();  // 🔥 Запускаем сразу при загрузке с�
 // }
 
 function convertISOToLocal(isoString) {
+    console.log(`Тип времени:${typeof(isoString)}`)
+    console.log(`Время:${isoString}`)
     let timestamp = Date.parse(isoString);
     if (isNaN(timestamp)) {
         console.error("Неверный формат даты:", isoString);
