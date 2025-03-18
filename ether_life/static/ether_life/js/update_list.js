@@ -49,6 +49,7 @@ updateList();  // 🔥 Запускаем сразу при загрузке с�
 // }
 
 function convertISOToLocal(parametr) {
+    console.log(`parametr = ${parametr}`)
     isoString = parametr.replace(" ", "T") +".000Z"
     console.log(`Тип времени:${typeof(isoString)}`)
     console.log(`Время:${isoString}`)
