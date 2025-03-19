@@ -57,7 +57,7 @@ function convertISOToLocal(parametr) {
     let timePart = parts[1]; // "15:52:07"
 
     // Формируем ISO-строку
-    let isoString = `${dateParts[2].replace("20","")}-${dateParts[1]}-${dateParts[0]}T${timePart}.000Z`;
+    let isoString = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}T${timePart}.000Z`;
     console.log(`Тип времени: ${typeof isoString}`);
     console.log(`Время: ${isoString}`);
 
@@ -67,6 +67,6 @@ function convertISOToLocal(parametr) {
         console.error("Неверный формат даты:", isoString);
         return "Invalid Date";
     }
-
-    return new Date(timestamp).toLocaleString();
+        timeLable = new Date(timestamp).toLocaleString();
+    return timeLable.slice(0,6) + timeLable.slice(8);
 }
