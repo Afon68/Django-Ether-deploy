@@ -27,7 +27,7 @@ class EthereumPriceConsumer(AsyncWebsocketConsumer):
                 )()
 
                 # Преобразуем данные для JSON
-                price_list = [{"timestamp": str(localtime(p.timestamp).strftime("%H:%M:%S")), "price": float(p.price)} for p in latest_prices]
+                price_list = [{"timestamp": str(p.timestamp), "price": float(p.price)} for p in latest_prices]
                 
                 # ✅ Отправляем новые данные на фронт
                 await self.send(text_data=json.dumps({"prices": price_list}))
