@@ -139,29 +139,33 @@ const ctx = document.getElementById('ethChart').getContext('2d');
                     console.error("WebSocket Ошибка: ", error);
                 };
 
-                
-
-
-                function convertISOToLocal(parametr) {
-                    console.log(`parametr = ${parametr}`);
-                
-                    // Разбираем строку "18.03.2025 15:52:07"
-                    let parts = parametr.split(" ");
-                    let dateParts = parts[0].split("."); // ["18", "03", "2025"]
-                    let timePart = parts[1]; // "15:52:07"
-                
-                    // Формируем ISO-строку
-                    let isoString = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}T${timePart}.000Z`;
-                    console.log(`Тип времени: ${typeof isoString}`);
-                    console.log(`Время: ${isoString}`);
-                
-                    // Проверяем, можно ли разобрать дату
-                    let timestamp = Date.parse(isoString);
-                    if (isNaN(timestamp)) {
-                        console.error("Неверный формат даты:", isoString);
-                        return "Invalid Date";
-                    }
-                        timeLable = new Date(timestamp).toLocaleString();
-                    return timeLable.slice(0,6) + timeLable.slice(8);
+                function convertISOToLocal(isoString) {
+                    console.log(`isoString = ${isoString}`);
+                    let date = new Date(isoString);
+                    return date.toLocaleString(); 
                 }
+
+
+                // function convertISOToLocal(parametr) {
+                //     console.log(`parametr = ${parametr}`);
+                
+                //     // Разбираем строку "18.03.2025 15:52:07"
+                //     let parts = parametr.split(" ");
+                //     let dateParts = parts[0].split("."); // ["18", "03", "2025"]
+                //     let timePart = parts[1]; // "15:52:07"
+                
+                //     // Формируем ISO-строку
+                //     let isoString = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}T${timePart}.000Z`;
+                //     console.log(`Тип времени: ${typeof isoString}`);
+                //     console.log(`Время: ${isoString}`);
+                
+                //     // Проверяем, можно ли разобрать дату
+                //     let timestamp = Date.parse(isoString);
+                //     if (isNaN(timestamp)) {
+                //         console.error("Неверный формат даты:", isoString);
+                //         return "Invalid Date";
+                //     }
+                //         timeLable = new Date(timestamp).toLocaleString();
+                //     return timeLable.slice(0,6) + timeLable.slice(8);
+                // }
                 

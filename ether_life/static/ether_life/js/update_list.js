@@ -44,6 +44,7 @@ setInterval(updateList, 60000);  // 🔄 Обновляем цену кажды�
 updateList();  // 🔥 Запускаем сразу при загрузке страницы
 
 function convertISOToLocal(isoString) {
+    console.log(`isoString = ${isoString}`);
     let date = new Date(isoString);
     return date.toLocaleString(); 
 }
