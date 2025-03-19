@@ -85,6 +85,8 @@ const ctx = document.getElementById('ethChart').getContext('2d');
                 
                     
                     const sortedPrices = data.prices;
+                    console.log(`priceData.timestamp: ${priceData[0].timestamp}`);
+                    // console.log(`Время: ${isoString}`);
                     // const sortedPrices = data.prices.filter(p => p.price !== undefined);
                     // ✅ 2. Перебираем весь массив и обновляем график
                     ethChart.data.labels = [];
@@ -138,7 +140,7 @@ const ctx = document.getElementById('ethChart').getContext('2d');
                 };
 
                 
-                
+
 
                 function convertISOToLocal(parametr) {
                     console.log(`parametr = ${parametr}`);
