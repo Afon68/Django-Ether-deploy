@@ -142,7 +142,8 @@ const ctx = document.getElementById('ethChart').getContext('2d');
                 function convertISOToLocal(isoString) {
                     console.log(`isoString = ${isoString}`);
                     let date = new Date(isoString);
-                    return date.toLocaleString(); 
+                    timeLable = date.toLocaleString()
+                    return timeLable.slice(0,6) + timeLable.slice(8,10) + timeLable.slice(11); 
                 }
 
 

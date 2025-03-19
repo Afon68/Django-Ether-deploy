@@ -15,7 +15,7 @@ function updateList() {
             for (let elem of data.price_list.slice(0,24).reverse()) {
                 let row = table.insertRow(-1);  // Добавляем новую строку
                 // row.insertCell(0).innerText = elem.timestamp;  // Время
-                row.insertCell(0).innerText = convertISOToLocal(elem.timestamp).replace(","," ");  // Время
+                row.insertCell(0).innerText = convertISOToLocal(elem.timestamp);  // Время
 
                 
                 let priceCell = row.insertCell(1)
@@ -46,7 +46,8 @@ updateList();  // 🔥 Запускаем сразу при загрузке с�
 function convertISOToLocal(isoString) {
     console.log(`isoString = ${isoString}`);
     let date = new Date(isoString);
-    return date.toLocaleString(); 
+    timeLable = date.toLocaleString()
+    return timeLable.slice(0,6) + timeLable.slice(8,10) + timeLable.slice(11); 
 }
 
 // function convertISOToLocal(parametr) {
