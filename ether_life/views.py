@@ -41,7 +41,7 @@ def get_latest_price_list(request):
     previous_price = None
     # print(prices)
     for i in range(len(prices)):
-        prices[i].timestamp = localtime(prices[i].timestamp).strftime("%d.%m.%Y %H:%M:%S")
+        # prices[i].timestamp = localtime(prices[i].timestamp).strftime("%d.%m.%Y %H:%M:%S")
         if i != len(prices) - 1:
             diff = round(prices[i].price - prices[i+1].price , 2)  # ✅ Вычитаем здесь
             if diff > 0:
